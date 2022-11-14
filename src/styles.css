@@ -1,5 +1,10 @@
+/* STYLES FOR index.js */
+
 * {
     box-sizing: border-box;
+    /* Which font is better? */
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
   
 body {
@@ -17,7 +22,11 @@ body {
 }
 
 .site-title {
+    display: flex;
+    align-items: stretch;
     font-size: 2rem;
+    gap: 10px;
+    padding: 0;
 }
 
 .nav ul {
@@ -25,11 +34,11 @@ body {
     margin: 0;
     list-style: none;
     display: flex;
-    gap: 1rem;
 }
 
 .nav li {
     height: 100%;
+    padding: 0 15px;
 }
 
 .nav a {
@@ -38,7 +47,7 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    padding: .25rem;
+    padding: 0;
 }
 
 .nav li:hover {
