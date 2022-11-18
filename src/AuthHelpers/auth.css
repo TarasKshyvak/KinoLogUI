@@ -1,9 +1,9 @@
-.login-container {
+.auth-container {
     margin: 40px auto;
     width: 70%;
 }
 
-.login-title {
+.auth-title {
     font-size: 25px;
     font-weight: 400;
     margin: 20px 0px;
@@ -28,7 +28,8 @@
     font-size: 16px;
 }
 
-.form-container input {
+.form-container input,
+.form-container select {
     margin-bottom: 10px;
     border: 1px solid #d8dee4;
     border-radius: 7px;
@@ -36,15 +37,47 @@
     padding: 0 10px;
 }
 
-.form-container input:focus {
+.form-container input:focus,
+.form-container select {
     outline-color: #0969da;
+}
+
+.date-input {
+    /* width: 320px; */
+    width: 90%;
+}
+
+/* Date picker icon div */
+#root > div > div > div > form > div > div {
+    height: 35px;
+    width: 35px;
+}
+
+/* Date picker button */
+#root > div > div > div > form > div > div > button {
+    height: 35px;
+    width: 35px;
+}
+
+.form-container .gender {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gender-label {
+    margin-top: 13.9px;
+}
+
+.gender-select {
+    margin-top: 6px;
+    width: 95px;
 }
 
 .password {
     font-weight: 900;
 }
 
-.submit-login {
+.submit-button {
     margin-top: 5px;
     height: 35px;
     border: none;
@@ -55,10 +88,11 @@
     border-radius: 7px;
 }
 
-.submit-login:hover {
+.submit-button:hover,
+select {
     cursor: pointer;
 }
 
-.submit-login:active {
+.submit-button:active {
     background-color: darkgreen;
 }

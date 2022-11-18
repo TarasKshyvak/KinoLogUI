@@ -1,8 +1,12 @@
 import React from 'react';
 
+const submit = () => {
+    
+}
+
 const LoginForm = () => {
     return (
-        <form className='form-container' method="post">
+        <form className='form-container' method="post" onSubmit={submit}>
             <label for="username">
                 Username
             </label>
@@ -11,7 +15,7 @@ const LoginForm = () => {
                 Password
             </label>
             <input id="password" type="password" name="password" className='password'/>
-            <button className='submit-login'>
+            <button className='submit-button'>
                 Log in
             </button>
         </form>
