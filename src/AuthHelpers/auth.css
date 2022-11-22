@@ -1,5 +1,6 @@
 .auth-container {
     margin: 40px auto;
+    min-width: 400px;
     width: 70%;
 }
 
