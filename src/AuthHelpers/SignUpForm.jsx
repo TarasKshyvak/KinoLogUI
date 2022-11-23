@@ -51,6 +51,14 @@ const SignUpForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.username}
             />
+            {
+                formik.touched.username && Boolean(formik.errors.username) &&
+                <div className='error-container'>
+                    <div className="error-messsage">
+                        {formik.touched.username && formik.errors.username}
+                    </div>
+                </div>
+            }
             <label htmlFor="email">Email</label>
             <input
                 id="email"
@@ -59,11 +67,20 @@ const SignUpForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.email}
             />
+            {
+                formik.touched.email && Boolean(formik.errors.email) &&
+                <div className='error-container'>
+                    <div className="error-messsage">
+                        {formik.touched.email && formik.errors.email}
+                    </div>
+                </div>
+            }
             <label htmlFor="birthdate">Birthdate</label>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     id='birthdate'
                     name='birthdate'
+                    className='datepicker'
                     inputFormat="DD/MM/YYYY"
                     value={formik.values.birthdate}
                     onChange={newValue => formik.setFieldValue("birthdate", newValue)}
@@ -72,7 +89,7 @@ const SignUpForm = () => {
                             width: '102%',
                             display: 'flex', 
                             justifyContent: 'space-between',
-                            alignItems: 'flex-start'
+                            alignItems: 'flex-start',
                         }}>
                           <input
                             ref={inputRef}
@@ -84,6 +101,14 @@ const SignUpForm = () => {
                       )}
                 />
             </LocalizationProvider>
+            {
+                formik.touched.birthdate && Boolean(formik.errors.birthdate) &&
+                <div className='error-container'>
+                    <div className="error-messsage">
+                        {formik.touched.birthdate && formik.errors.birthdate}
+                    </div>
+                </div>
+            }
             <div className='gender'>
                 <label htmlFor='gender' className='gender-label'>
                     Select your gender:
@@ -109,6 +134,14 @@ const SignUpForm = () => {
                 onChange={formik.handleChange}
                 className='password'
             />
+            {
+                formik.touched.password && Boolean(formik.errors.password) &&
+                <div className='error-container'>
+                    <div className="error-messsage">
+                        {formik.touched.password && formik.errors.password}
+                    </div>
+                </div>
+            }
             <label htmlFor="passwordConfirmation">Re-enter password</label>
             <input 
                 id="passwordConfirmation"
@@ -118,6 +151,14 @@ const SignUpForm = () => {
                 onChange={formik.handleChange}
                 className='password'
             />
+            {
+                formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation) &&
+                <div className='error-container'>
+                    <div className="error-messsage">
+                        {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+                    </div>
+                </div>
+            }
             <button className='submit-button' type='submit'>Sign up</button>
         </form>
     );

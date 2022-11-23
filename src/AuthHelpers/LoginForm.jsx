@@ -7,17 +7,20 @@ const submit = () => {
 const LoginForm = () => {
     return (
         <form className='form-container' method="post" onSubmit={submit}>
-            <label for="username">
-                Username
-            </label>
-            <input id="username" type="text" name="username" />
-            <label for="password">
-                Password
-            </label>
-            <input id="password" type="password" name="password" className='password'/>
-            <button className='submit-button'>
-                Log in
-            </button>
+            <label htmlFor="username">Username</label>
+            <input
+                id="username"
+                type="text"
+                name="username" 
+            />
+            <label htmlFor="password">Password</label>
+            <input
+                id="password"
+                type="password"
+                name="password"
+                className='password'
+            />
+            <button className='submit-button'>Log in</button>
         </form>
     );
 };
