@@ -2,10 +2,15 @@ import { Box } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
+import ErrorAlert from '../Components/ErrorAlert';
+import { convertDate } from '../Helpers/DateHelper';
+import UsersService from '../services/UsersService';
 
 const SignUpForm = () => {
+    const [errorsArray, setErrorsArray] = useState([]);
+
     const signupSchema = Yup.object().shape({
         username: Yup.string()
             .min(2, 'Username length must be between 2 and 30')
@@ -17,6 +22,9 @@ const SignUpForm = () => {
         birthdate: Yup.date()
             .min(new Date('1910-01-01T00:00:00'), 'Accessible birthdate from year 1910 to today')
             .max(new Date(), 'Accessible birthdate from year 1910 to today')
+            .required('Required'),
+        genderId: Yup.number()
+            .min(1, 'Select your gender')
             .required('Required'),
         password: Yup.string()
             .required('Required'),
@@ -30,18 +38,32 @@ const SignUpForm = () => {
             username: '',
             email: '',
             birthdate: new Date('2000-01-01T00:00:00'),
-            gender: '',
+            genderId: 0,
             password: '',
             passwordConfirmation: ''
         },
         validationSchema: signupSchema,
-        onSubmit: values => {
+        onSubmit: async(values) => {
+            setErrorsArray([]);
+            values.birthdate = convertDate(values.birthdate);
             let data = JSON.stringify(values, null, 2);
-            console.log(data);
+
+            console.log("Posting user:",data);
+            const response = await UsersService.addUser(data);
+            console.log(response);
+            if (!response.data) {
+                setErrorsArray(response.errors);
+            }
         },
       });
 
     return (
+        <div>
+        <Box sx={{position: 'fixed', zIndex: 999, bottom: '20px', left: '20px'}}>
+                {errorsArray.map((err) => {
+                    return (<ErrorAlert key={err}>{err}</ErrorAlert>)
+                })}
+        </Box>
         <form className='form-container' onSubmit={formik.handleSubmit}>
             <label htmlFor="username">Username</label>
             <input
@@ -110,21 +132,29 @@ const SignUpForm = () => {
                 </div>
             }
             <div className='gender'>
-                <label htmlFor='gender' className='gender-label'>
+                <label htmlFor='genderId' className='gender-label'>
                     Select your gender:
                 </label>
                 <select 
-                    id="gender"
-                    name="gender"
+                    id="genderId"
+                    name="genderId"
                     className='gender-select'
-                    value={formik.values.gender}
+                    value={formik.values.genderId}
                     onChange={formik.handleChange}
                 >
-                    <option value="" disabled>Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value={0} disabled>Gender</option>
+                    <option value={1}>Male</option>
+                    <option value={2}>Female</option>
                 </select>
-            </div>            
+            </div>
+            {
+                formik.touched.genderId && Boolean(formik.errors.genderId) &&
+                <div className='error-container'>
+                    <div className="error-messsage">
+                        {formik.touched.genderId && formik.errors.genderId}
+                    </div>
+                </div>
+            }
             <label htmlFor="password">Password</label>
             <input
                 id="password"
@@ -161,6 +191,7 @@ const SignUpForm = () => {
             }
             <button className='submit-button' type='submit'>Sign up</button>
         </form>
+        </div>
     );
 };
 
