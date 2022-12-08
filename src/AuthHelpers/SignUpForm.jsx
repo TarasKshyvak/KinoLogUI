@@ -59,138 +59,138 @@ const SignUpForm = () => {
 
     return (
         <div>
-        <Box sx={{position: 'fixed', zIndex: 999, bottom: '20px', left: '20px'}}>
-                {errorsArray.map((err) => {
-                    return (<ErrorAlert key={err}>{err}</ErrorAlert>)
-                })}
-        </Box>
-        <form className='form-container' onSubmit={formik.handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input
-                id="username"
-                name="username"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.username}
-            />
-            {
-                formik.touched.username && Boolean(formik.errors.username) &&
-                <div className='error-container'>
-                    <div className="error-messsage">
-                        {formik.touched.username && formik.errors.username}
-                    </div>
-                </div>
-            }
-            <label htmlFor="email">Email</label>
-            <input
-                id="email"
-                name="email"
-                type='email'
-                onChange={formik.handleChange}
-                value={formik.values.email}
-            />
-            {
-                formik.touched.email && Boolean(formik.errors.email) &&
-                <div className='error-container'>
-                    <div className="error-messsage">
-                        {formik.touched.email && formik.errors.email}
-                    </div>
-                </div>
-            }
-            <label htmlFor="birthdate">Birthdate</label>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                    id='birthdate'
-                    name='birthdate'
-                    className='datepicker'
-                    inputFormat="DD/MM/YYYY"
-                    value={formik.values.birthdate}
-                    onChange={newValue => formik.setFieldValue("birthdate", newValue)}
-                    renderInput={({ inputRef, inputProps, InputProps }) => (
-                        <Box sx={{
-                            width: '102%',
-                            display: 'flex', 
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start',
-                        }}>
-                          <input
-                            ref={inputRef}
-                            {...inputProps}
-                            className='date-input'
-                          />
-                          {InputProps?.endAdornment}
-                        </Box>
-                      )}
-                />
-            </LocalizationProvider>
-            {
-                formik.touched.birthdate && Boolean(formik.errors.birthdate) &&
-                <div className='error-container'>
-                    <div className="error-messsage">
-                        {formik.touched.birthdate && formik.errors.birthdate}
-                    </div>
-                </div>
-            }
-            <div className='gender'>
-                <label htmlFor='genderId' className='gender-label'>
-                    Select your gender:
-                </label>
-                <select 
-                    id="genderId"
-                    name="genderId"
-                    className='gender-select'
-                    value={formik.values.genderId}
+            <Box sx={{position: 'fixed', zIndex: 999, bottom: '20px', left: '20px'}}>
+                    {errorsArray.map((err) => {
+                        return (<ErrorAlert key={err}>{err}</ErrorAlert>)
+                    })}
+            </Box>
+            <form className='form-container' onSubmit={formik.handleSubmit}>
+                <label htmlFor="username">Username</label>
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
                     onChange={formik.handleChange}
-                >
-                    <option value={0} disabled>Gender</option>
-                    <option value={1}>Male</option>
-                    <option value={2}>Female</option>
-                </select>
-            </div>
-            {
-                formik.touched.genderId && Boolean(formik.errors.genderId) &&
-                <div className='error-container'>
-                    <div className="error-messsage">
-                        {formik.touched.genderId && formik.errors.genderId}
+                    value={formik.values.username}
+                />
+                {
+                    formik.touched.username && Boolean(formik.errors.username) &&
+                    <div className='error-container'>
+                        <div className="error-messsage">
+                            {formik.touched.username && formik.errors.username}
+                        </div>
                     </div>
-                </div>
-            }
-            <label htmlFor="password">Password</label>
-            <input
-                id="password"
-                type="password"
-                name="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                className='password'
-            />
-            {
-                formik.touched.password && Boolean(formik.errors.password) &&
-                <div className='error-container'>
-                    <div className="error-messsage">
-                        {formik.touched.password && formik.errors.password}
+                }
+                <label htmlFor="email">Email</label>
+                <input
+                    id="email"
+                    name="email"
+                    type='email'
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                />
+                {
+                    formik.touched.email && Boolean(formik.errors.email) &&
+                    <div className='error-container'>
+                        <div className="error-messsage">
+                            {formik.touched.email && formik.errors.email}
+                        </div>
                     </div>
-                </div>
-            }
-            <label htmlFor="passwordConfirmation">Re-enter password</label>
-            <input 
-                id="passwordConfirmation"
-                type="password"
-                name="passwordConfirmation"
-                value={formik.values.passwordConfirmation}
-                onChange={formik.handleChange}
-                className='password'
-            />
-            {
-                formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation) &&
-                <div className='error-container'>
-                    <div className="error-messsage">
-                        {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+                }
+                <label htmlFor="birthdate">Birthdate</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                        id='birthdate'
+                        name='birthdate'
+                        className='datepicker'
+                        inputFormat="DD/MM/YYYY"
+                        value={formik.values.birthdate}
+                        onChange={newValue => formik.setFieldValue("birthdate", newValue)}
+                        renderInput={({ inputRef, inputProps, InputProps }) => (
+                            <Box sx={{
+                                width: '102%',
+                                display: 'flex', 
+                                justifyContent: 'space-between',
+                                alignItems: 'flex-start',
+                            }}>
+                            <input
+                                ref={inputRef}
+                                {...inputProps}
+                                className='date-input'
+                            />
+                            {InputProps?.endAdornment}
+                            </Box>
+                        )}
+                    />
+                </LocalizationProvider>
+                {
+                    formik.touched.birthdate && Boolean(formik.errors.birthdate) &&
+                    <div className='error-container'>
+                        <div className="error-messsage">
+                            {formik.touched.birthdate && formik.errors.birthdate}
+                        </div>
                     </div>
+                }
+                <div className='gender'>
+                    <label htmlFor='genderId' className='gender-label'>
+                        Select your gender:
+                    </label>
+                    <select 
+                        id="genderId"
+                        name="genderId"
+                        className='gender-select'
+                        value={formik.values.genderId}
+                        onChange={formik.handleChange}
+                    >
+                        <option value={0} disabled>Gender</option>
+                        <option value={1}>Male</option>
+                        <option value={2}>Female</option>
+                    </select>
                 </div>
-            }
-            <button className='submit-button' type='submit'>Sign up</button>
-        </form>
+                {
+                    formik.touched.genderId && Boolean(formik.errors.genderId) &&
+                    <div className='error-container'>
+                        <div className="error-messsage">
+                            {formik.touched.genderId && formik.errors.genderId}
+                        </div>
+                    </div>
+                }
+                <label htmlFor="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    className='password'
+                />
+                {
+                    formik.touched.password && Boolean(formik.errors.password) &&
+                    <div className='error-container'>
+                        <div className="error-messsage">
+                            {formik.touched.password && formik.errors.password}
+                        </div>
+                    </div>
+                }
+                <label htmlFor="passwordConfirmation">Re-enter password</label>
+                <input 
+                    id="passwordConfirmation"
+                    type="password"
+                    name="passwordConfirmation"
+                    value={formik.values.passwordConfirmation}
+                    onChange={formik.handleChange}
+                    className='password'
+                />
+                {
+                    formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation) &&
+                    <div className='error-container'>
+                        <div className="error-messsage">
+                            {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+                        </div>
+                    </div>
+                }
+                <button className='submit-button' type='submit'>Sign up</button>
+            </form>
         </div>
     );
 };

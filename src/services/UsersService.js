@@ -30,9 +30,25 @@ export default class UsersService {
             }
         })
         .then(res => response.data = res.data)
-        .catch(error => response.errors.push(error.response.data.message)
-        );
+        .catch(error => response.errors.push(error.response.data.message));
         
+        return response;
+    }
+
+    static async authenticate(authRequest) {
+        const response = {
+            data: null,
+            errors: []
+        }
+
+        await axios.post(routes.apiUrl + routes.users + '/Authenticate', authRequest, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => response.data = res.data)
+        .catch(error => response.errors.push(error.response.data.message));
+
         return response;
     }
 
