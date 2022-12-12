@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useIsAuth } from "../hooks/useIsAuth";
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
         currentUser: null,
-        isLogged: useIsAuth,
+        isLogged: false,
     },
     reducers: {
         setIsLogged(state, action) {

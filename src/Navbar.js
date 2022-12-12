@@ -1,17 +1,13 @@
-import { useSignOut } from 'react-auth-kit';
-import { useDispatch, useSelector } from 'react-redux';
+import { useIsAuthenticated, useSignOut } from 'react-auth-kit';
 import { Link, useNavigate } from 'react-router-dom';
-import { setIsLogged } from './store/authSlice';
 
 export default function NavBar(){
-    const dispatch = useDispatch();
-    const isAuthenticated = useSelector(state => state.auth.isLogged);
+    const isAuth = useIsAuthenticated();
     const signOut = useSignOut();
     const navigate = useNavigate();
 
     const logOut = () => {
         signOut();
-        dispatch(setIsLogged({isLogged: false}));
         navigate('/');
     }
 
@@ -23,7 +19,7 @@ export default function NavBar(){
             </div>
         </Link>
         {
-            isAuthenticated 
+            isAuth()
             ?
             <ul>
                 <li>

@@ -3,12 +3,16 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { useSignIn } from 'react-auth-kit';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import ErrorAlert from '../Components/ErrorAlert';
 import { convertDate } from '../Helpers/DateHelper';
 import UsersService from '../services/UsersService';
 
 const SignUpForm = () => {
+    const signIn = useSignIn();
+    const navigate = useNavigate();
     const [errorsArray, setErrorsArray] = useState([]);
 
     const signupSchema = Yup.object().shape({
@@ -48,12 +52,26 @@ const SignUpForm = () => {
             values.birthdate = convertDate(values.birthdate);
             let data = JSON.stringify(values, null, 2);
 
-            console.log("Posting user:",data);
             const response = await UsersService.addUser(data);
-            console.log(response);
             if (!response.data) {
                 setErrorsArray(response.errors);
             }
+
+            const authResponse = await UsersService.authenticate({
+                username: values.username,
+                password: values.password
+            });
+            signIn({
+                token: authResponse.data.token,
+                expiresIn: 720,
+                tokenType: 'Bearer',
+                authState: {
+                    userId: authResponse.data.id,
+                    role: authResponse.data.role,
+                    username: authResponse.data.username
+                }
+            })
+            navigate('/profile');
         },
       });
 

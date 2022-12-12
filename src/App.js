@@ -20,13 +20,13 @@ function App () {
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/profile' element={
                         <RequireAuth loginPath={'/login'}>
-                        <Profile />
-                    </RequireAuth>
+                            <Profile />
+                        </RequireAuth>
                     } />
                     <Route path='/signout' element={
                         <RequireAuth loginPath={'/login'}>
-                        <SignOut />
-                    </RequireAuth>
+                            <SignOut />
+                        </RequireAuth>
                     } />
                 </Routes>
             </div>

@@ -2,15 +2,12 @@ import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import ErrorAlert from '../Components/ErrorAlert';
 import UsersService from '../services/UsersService';
-import { setIsLogged } from '../store/authSlice';
 
 const LoginForm = () => {
-    const dispatch = useDispatch();
     const signIn = useSignIn();
     const [errorsArray, setErrorsArray] = useState([]);
     const navigate = useNavigate();
@@ -31,7 +28,6 @@ const LoginForm = () => {
         onSubmit: async(values) => {
             setErrorsArray([]);
             let data = JSON.stringify(values, null, 2);
-            console.log("Authenticating",data);
             const response = await UsersService.authenticate(data);
 
             signIn({
@@ -47,7 +43,6 @@ const LoginForm = () => {
             if (!response.data) {
                 setErrorsArray(response.errors);
             }
-            dispatch(setIsLogged({isLogged: true}));
             navigate('/');
         },
       });
